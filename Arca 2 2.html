@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Primera Página</title>
+</head>
+<style>
+
+header {
+	max-width: 1400px;
+	height: 60px;
+	background-color:  #007fdd;
+	text-align: center;
+	margin: -10px;
+	opacity:0.8;
+	}
+	
+body {
+	max-width: 1400px;
+	height: auto;
+	background-image: url("FondoARCA.jpg");
+	background-size:cover;
+	background-repeat: no-repeat;
+	text-align:center;
+	
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        overflow: hidden;
+        cursor: none;
+    
+	}
+	
+main {
+	max-width: 1400px;
+	height:600px;;
+}
+
+
+
+#logo {
+    width:400px;
+    height:auto;
+    float:top;
+}
+
+#lateral {
+    position: fixed;
+    left:0px;
+    top:0px;
+    width:450px;
+    height:auto;
+    z-index:9999;
+    animation: escalar 20s infinite alternate; /* Nombre de la animación, duración, número de repeticiones y dirección */
+}
+
+@keyframes escalar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+#lateral2 {
+    position: fixed;
+    left:0px;
+    bottom: 0px;
+    width:250px;
+    height:auto;
+    z-index:999;
+    animation: escalar 80s infinite alternate; /* Nombre de la animación, duración, número de repeticiones y dirección */
+}
+
+@keyframes escalar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#lateralflor {
+    position: fixed;
+    left:10px;
+    bottom: -50px;
+    width:200px;
+    height:auto;
+    z-index:999999;
+    animation: escalar 40s infinite alternate; /* Nombre de la animación, duración, número de repeticiones y dirección */
+}
+
+@keyframes escalar {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+nav {		
+			
+	top:600px;
+    padding: 10px;
+    text-align: center;
+        }
+
+nav a {
+     color: white;
+     margin: 0 15px;
+     text-decoration: none;
+        }
+
+nav a:hover {
+text-decoration: underline;
+        }
+
+button {
+    background-color:transparent;
+    color:rgb(255, 255, 255);
+    border: 10px, 10px, 10px, 10px;
+    border-color: #f0f0f0;
+    padding: 18px 18px 18px 18px;
+    border-radius: 50px;
+    font-size: 20px;
+}
+
+#volumenOn {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color:rgb(255, 251, 0);
+    border: 1px, 1px, 1px, 1px;
+    border-radius: 5px;
+    left:0px;
+    top: 30%;
+    z-index: 99999;
+}
+
+#volumen {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color:rgb(255, 251, 0);
+    border: 1px, 1px, 1px, 1px;
+    border-radius: 5px;
+    left:0px;
+    top: 36%;
+    z-index: 99999;
+}
+
+
+
+.box {
+        width: 150px;
+        height: 96px;
+        background-image: url("colibri%20(1).gif");
+background-size:cover;
+ -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+	background-repeat: no-repeat;
+        position: absolute;
+        transition:  0.8s ease;
+    }
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: #c2c2c2;
+        opacity: 0.5;
+        border-radius: 50px;
+        border: 2px solid #c2c2c2;
+        position: absolute;
+        pointer-events: none;
+        transition:  0s linear;
+
+        position: fixed;
+   
+    z-index:9999999;	
+    }
+
+#piedepagina {
+  position:fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 200px;
+  background-color: rgb(255, 228, 21);
+  z-index: -9;
+  color: rgb(1, 68, 0);
+}
+
+</style>
+
+<body class="cuerpo"> 
+<header>
+
+</header>
+<audio id="myAudio" loop controls hidden >
+    <source src="audioaves.mp3" type="audio/mpeg">
+</audio>
+<img class="play-button" id="volumen" src="volumen.png">
+<img class="play-buttonOn" id="volumenOn" src="volumenOn.png">
+<img id="lateral" src="Lateral.png">
+<img id="lateralflor" src="Lateralflor.png">
+<img id="lateral2" src="Lateral2.png">
+    <img id="logo" src="arcablanco.png">
+
+    
+ <nav>
+        <a href="#home"><button>Buscador</button></a>
+	    <a href="#about"><button>Album</button></a>        
+    </nav>
+<div class="box"></div>
+    <div class="cursor"></div>
+
+    <script>
+    const box = document.querySelector('.box');
+    const cursor = document.querySelector('.cursor');
+    let mouseX = 0, mouseY = 0;
+    let boxX = 0, boxY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Actualizar la posición del cursor personalizado
+        cursor.style.left = `${mouseX - 10}px`;
+        cursor.style.top = `${mouseY - 10}px`;
+    });
+
+    function animate() {
+        // Calcular la nueva posición de la caja con un retraso
+        let dx = mouseX - boxX;
+        let dy = mouseY - boxY;
+        
+        boxX += dx * 0.1;
+        boxY += dy * 0.1;
+        
+        // Aplicar la nueva posición a la caja
+        box.style.left = `${boxX - 1}px`;
+        box.style.top = `${boxY - -8}px`;
+        
+        // Efecto de rotación basado en la velocidad
+        const speed = Math.sqrt(dx*dx + dy*dy);
+        const rotation = speed * 0.02;
+        box.style.transform = `rotate(${rotation}deg)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Efecto de pulsación en la caja
+    setInterval(() => {
+        box.style.transform = `rotate(${box.style.transform}) scale(1.1)`;
+        setTimeout(() => {
+            box.style.transform = `rotate(${box.style.transform}) scale(1)`;
+        }, 150);
+    }, 2000);
+
+
+  
+
+    const imagen = document.getElementById("volumenOn");
+        const audio = document.getElementById("myAudio");
+        let volumenOriginal = 1;
+
+        imagen.addEventListener('click', () => {
+                if (audio.volume < 1) {
+                    volumenOriginal = audio.volume;
+                    audio.volume = 1;
+                    console.log("Audio silenciado");
+                } 
+            
+        });
+
+
+        const imagenoff = document.getElementById("volumen");
+        const audiooff = document.getElementById("myAudio");
+        let volumenSilencio = 0;
+
+        imagenoff.addEventListener('click', () => {
+            
+                if (audiooff.volume > 0) {
+                    volumenSilencio = audiooff.volume;
+                    audio.volume = 0;
+                    console.log("Audio silenciado");
+                } 
+           
+        });
+
+    
+
+
+        const audio2 = document.getElementById("myAudio");
+        let audioReproducido = false;
+
+        document.body.addEventListener('click', () => {
+            if (!audioReproducido) {
+                audio2.play();
+                audioReproducido = true;
+            }
+        });
+
+
+
+
+
+</script>
+
+    <footer id="piedepagina">
+      <p>Webapp desarrollada por:</p>
+      <img src="">
+    </footer>
+</body>
+</html>

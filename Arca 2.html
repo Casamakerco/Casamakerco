@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Primera Página</title>
+</head>
+<style>
+
+header {
+	max-width: 1400px;
+	height: 60px;
+	background-color:  #007fdd;
+	text-align: center;
+	margin: -10px;
+	opacity:0.8;
+	}
+	
+body {
+	max-width: 1400px;
+	height: auto;
+	background-image: url("file:///Users/casamaker/Documents/FondoARCA.jpg");
+	background-size:cover;
+	background-repeat: no-repeat;
+	text-align:center;
+	
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        overflow: hidden;
+        cursor: none;
+    
+	}
+	
+main {
+	max-width: 1400px;
+	height:600px;;
+}
+
+
+
+#logo {
+    width:400px;
+    height:auto;
+    float:top;
+}
+
+#lateral {
+    position: fixed;
+    left:0px;
+    top:0px;
+    width:450px;
+    height:auto;
+    z-index:9999;
+}
+
+
+#lateral2 {
+    position: fixed;
+    left:0px;
+    bottom: 0px;
+    width:250px;
+    height:auto;
+    z-index:999;
+}
+
+
+
+	
+nav {		
+			
+	top:600px;
+    padding: 10px;
+    text-align: center;
+        }
+
+nav a {
+     color: white;
+     margin: 0 15px;
+     text-decoration: none;
+        }
+
+nav a:hover {
+text-decoration: underline;
+        }
+
+button {
+    background-color:transparent;
+    color:rgb(255, 255, 255);
+    border: 10px, 10px, 10px, 10px;
+    border-color: #f0f0f0;
+    padding: 18px 18px 18px 18px;
+    border-radius: 50px;
+    font-size: 20px;
+}
+
+#volumen {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color:rgb(255, 251, 0);
+    border: 1px, 1px, 1px, 1px;
+    border-radius: 0px;
+    left:0px;
+    top: 30%;
+    z-index: 99999;
+}
+
+
+
+.box {
+        width: 150px;
+        height: 96px;
+        background-image: url("file:///Users/casamaker/Documents/colibri%20(1).gif");
+background-size:cover;
+ -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+	background-repeat: no-repeat;
+        position: absolute;
+        transition:  0.8s ease;
+    }
+    .cursor {
+        width: 20px;
+        height: 20px;
+        background-color: #c2c2c2;
+        opacity: 0.5;
+        border-radius: 50px;
+        border: 2px solid #c2c2c2;
+        position: absolute;
+        pointer-events: none;
+        transition:  0s linear;
+
+        position: fixed;
+   
+    z-index:9999999;	
+    }
+
+</style>
+
+<body class="cuerpo"> 
+<header>
+
+</header>
+<audio id="myAudio" loop controls >
+    <source src="file:///Users/casamaker/Documents/audioaves.mp3" type="audio/mpeg">
+</audio>
+<img class="play-button" id="volumen" src="file:///Users/casamaker/Documents/volumen.png">
+<img id="lateral" src="file:///Users/casamaker/Documents/Lateral.png">
+<img id="lateral2" src="file:///Users/casamaker/Documents/Lateral2.png">
+    <img id="logo" src="file:///Users/casamaker/Documents/arcablanco.png">
+
+    
+ <nav>
+        <a href="#home"><button>Buscador</button></a>
+	    <a href="#about"><button>Album</button></a>        
+    </nav>
+<div class="box"></div>
+    <div class="cursor"></div>
+
+    <script>
+    const box = document.querySelector('.box');
+    const cursor = document.querySelector('.cursor');
+    let mouseX = 0, mouseY = 0;
+    let boxX = 0, boxY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Actualizar la posición del cursor personalizado
+        cursor.style.left = `${mouseX - 10}px`;
+        cursor.style.top = `${mouseY - 10}px`;
+    });
+
+    function animate() {
+        // Calcular la nueva posición de la caja con un retraso
+        let dx = mouseX - boxX;
+        let dy = mouseY - boxY;
+        
+        boxX += dx * 0.1;
+        boxY += dy * 0.1;
+        
+        // Aplicar la nueva posición a la caja
+        box.style.left = `${boxX - 1}px`;
+        box.style.top = `${boxY - -8}px`;
+        
+        // Efecto de rotación basado en la velocidad
+        const speed = Math.sqrt(dx*dx + dy*dy);
+        const rotation = speed * 0.02;
+        box.style.transform = `rotate(${rotation}deg)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Efecto de pulsación en la caja
+    setInterval(() => {
+        box.style.transform = `rotate(${box.style.transform}) scale(1.1)`;
+        setTimeout(() => {
+            box.style.transform = `rotate(${box.style.transform}) scale(1)`;
+        }, 150);
+    }, 2000);
+
+
+  
+
+    const imagen = document.getElementById("volumen");
+        const audio = document.getElementById("myAudio");
+        let volumenOriginal = 1;
+
+        imagen.addEventListener('click', () => {
+            try {
+                if (audio.volume > 0) {
+                    volumenOriginal = audio.volume;
+                    audio.volume = 0;
+                    console.log("Audio silenciado");
+                } else {
+                    audio.volume = volumenOriginal;
+                    console.log("Audio reactivado");
+                }
+            } catch (error) {
+                console.error("Error al controlar el volumen:", error);
+            }
+        });
+
+
+imagen.addEventListener('click', () => {
+    // ... (resto de la función)
+    if (audio.volume === 0) {
+        imagen.src = "file:///Users/casamaker/Documents/volumen.png"; // Cambia la imagen a una que indique silencio
+        
+    } else {
+        imagen.src = "file:///Users/casamaker/Documents/volumenOn.png"; // Cambia la imagen a una que indique sonido
+    }
+    
+});
+
+const audio2 = document.getElementById("myAudio");
+        let audioReproducido = false;
+
+        document.body.addEventListener('click', () => {
+            if (!audioReproducido) {
+                audio2.play();
+                audioReproducido = true;
+            }
+        });
+
+   
+   playButton.addEventListener('click', () => {
+     if (audioReproducido) {
+       audio1.pause();
+       // Aquí puedes cambiar la imagen del botón a "pausa"
+     playButton.querySelector('volumen').src = 'volumenOn.png';
+       audioReproducido = false;
+     } else {
+       audio1.play();
+       // Aquí puedes cambiar la imagen del botón a "play"
+   playButton.querySelector('volumen').src = 'volumen.png';
+   audioReproducido1 = true;
+     }
+   });
+
+
+</script>
+
+    <footer>
+    </footer>
+</body>
+</html>
